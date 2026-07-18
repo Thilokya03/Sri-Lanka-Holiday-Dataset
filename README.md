@@ -1,3 +1,4 @@
+
 # Sri Lanka Holiday Dataset
 
 This repository builds a structured holiday dataset for Sri Lanka by combining public holiday information from multiple sources and turning it into a full calendar dataset.
@@ -63,3 +64,29 @@ After running the pipeline, the following files are generated in the `csv/` dire
 - The document-based extraction process can be sensitive to PDF layout changes and may require manual review for some years.
 - Some scripts may take a few minutes to complete because they download and process historical documents.
 - The final dataset includes flags such as public, bank, mercantile, poya, weekend, and holiday indicators.
+
+## Licence
+
+This repository uses separate licences for source code and dataset content.
+
+### Source Code
+
+The Python scripts, GitHub Actions workflows, validation logic, and other source code are licensed under the **MIT License**.
+
+See [`LICENSE`](LICENSE).
+
+### Dataset and Documentation
+
+The processed CSV datasets, dataset structure, derived fields, metadata, and documentation are licensed under the **Creative Commons Attribution 4.0 International Licence — CC BY 4.0**, except for third-party source material.
+
+See [`LICENSE-DATA.md`](LICENSE-DATA.md).
+
+### Data Sources
+
+The dataset was independently compiled and processed using publicly available holiday information from:
+
+* The Central Bank of Sri Lanka
+* The Department of Government Printing, Sri Lanka
+* Relevant Government of Sri Lanka publications
+
+The source institutions remain the authoritative providers of the original information. This project is independent and is not officially endorsed by those institutions.
