@@ -6,8 +6,10 @@ import pathlib
 import time
 
 
-url = "https://www.cbsl.gov.lk/en/about/about-the-bank/bank-holidays-2026"
-csv_path = r"csv\CBS_holidays.csv"
+
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
+CSV_DIRECTORY = PROJECT_ROOT / "csv"
+CBS_CSV_PATH = CSV_DIRECTORY / "CBS_holidays.csv"
 
 def get_html_content(url:str):
     response = requests.get(url)
@@ -46,8 +48,7 @@ def extract_holidays(year:int ,html_content:str):
             'M' in typeOfHoliday])
     return holidays
 
-
-def create_csv(holidays:list, filename:str):
+def create_csv(holidays:list):
     # Create a DataFrame from the holidays list
     if not holidays:
         print("No holidays data to save.")
@@ -63,7 +64,7 @@ def create_csv(holidays:list, filename:str):
                                         "Is_Bank_Holiday",
                                         "Is_Mercantile_Holiday"])
     
-    path = pathlib.Path(filename)
+    path = pathlib.Path(CBS_CSV_PATH)
     path.parent.mkdir(parents=True, exist_ok=True)
     
     if path.exists() and path.stat().st_size > 0:
@@ -75,7 +76,7 @@ def create_csv(holidays:list, filename:str):
             keep="last"
         )
 
-    df.to_csv(filename, index=False)
+    df.to_csv(CBS_CSV_PATH, index=False)
     return True
 
 
@@ -86,8 +87,8 @@ if __name__ == "__main__":
         html_content = get_html_content(url)
         if html_content:
             holidays = extract_holidays(year, html_content)
-            if create_csv(holidays, csv_path):
-                print(f"Successfully created/updated the CSV file for year {year}.")
+            if create_csv(holidays):
+                print(f"Successfully created/updated the CSV file for year {year} to {CBS_CSV_PATH}.")
             else:
                 print(f"Failed to create/update the CSV file for year {year}.")
 
