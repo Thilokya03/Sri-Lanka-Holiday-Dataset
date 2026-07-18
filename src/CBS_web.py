@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import datetime
 import pathlib
+import time
+
 
 url = "https://www.cbsl.gov.lk/en/about/about-the-bank/bank-holidays-2026"
 csv_path = r"csv\CBS_holidays.csv"
@@ -88,3 +90,5 @@ if __name__ == "__main__":
                 print(f"Successfully created/updated the CSV file for year {year}.")
             else:
                 print(f"Failed to create/update the CSV file for year {year}.")
+
+        time.sleep(1)  
