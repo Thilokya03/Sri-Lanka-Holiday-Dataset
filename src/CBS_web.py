@@ -91,4 +91,4 @@ if __name__ == "__main__":
             else:
                 print(f"Failed to create/update the CSV file for year {year}.")
 
-        time.sleep(1)  
+        time.sleep(1)  # Throttle requests to be polite / avoid rate limiting
