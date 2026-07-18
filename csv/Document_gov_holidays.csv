@@ -1,0 +1,572 @@
+Year,Month,Date,Day,Holiday_Name,Is_Public_Holiday,Is_Bank_Holiday,Is_Mercantile_Holiday
+2005,January,14,Friday,Tamil Thai Pongal Day,True,True,True
+2005,January,21,Friday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2005,January,24,Monday,Duruthu Full Moon Poya Day,True,True,False
+2005,February,4,Friday,Independence Day,True,True,True
+2005,February,23,Wednesday,Navam Full Moon Poya Day,True,True,False
+2005,March,8,Tuesday,Maha Sivarathri Day,True,True,False
+2005,March,25,Friday,Good Friday,True,True,False
+2005,March,25,Friday,Medin Full Moon Poya Day,True,True,False
+2005,April,13,Wednesday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2005,April,14,Thursday,Sinhala and Tamil New Year Day,True,True,True
+2005,April,22,Friday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2005,April,23,Saturday,Bak Full Moon Poya Day,True,True,False
+2005,May,1,Sunday,May Day,True,True,True
+2005,May,2,Monday,Special Bank Holiday,False,True,False
+2005,May,23,Monday,Vesak Full Moon Poya Day,True,True,False
+2005,May,24,Tuesday,Day following Vesak Full Moon Poya Day,True,True,True
+2005,June,21,Tuesday,Poson Full Moon Poya Day,True,True,False
+2005,July,21,Thursday,Esala Full Moon Poya Day,True,True,False
+2005,August,19,Friday,Nikini Full Moon Poya Day,True,True,False
+2005,September,17,Saturday,Binara Full Moon Poya Day,True,True,False
+2005,October,17,Monday,Vap Full Moon Poya Day,True,True,False
+2005,November,1,Tuesday,Deepavali Festival Day,True,True,False
+2005,November,4,Friday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2005,November,15,Tuesday,Il Full Moon Poya Day,True,True,False
+2005,December,15,Thursday,Unduvap Full Moon Poya Day,True,True,False
+2005,December,25,Sunday,Christmas Day,True,True,True
+2005,December,26,Monday,Special Bank Holiday,True,False,False
+2006,January,11,Wednesday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2006,January,13,Friday,Duruthu Full Moon Poya Day,True,True,False
+2006,January,14,Saturday,Tamil Thai Pongal Day,True,True,True
+2006,February,4,Saturday,Independence Day,True,True,True
+2006,February,12,Sunday,Navam Full Moon Poya Day,True,True,False
+2006,February,26,Sunday,Maha Sivarathri Day,True,True,False
+2006,March,14,Tuesday,Medin Full Moon Poya Day,True,True,False
+2006,April,11,Tuesday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2006,April,13,Thursday,Bak Full Moon Poya Day,True,True,False
+2006,April,13,Thursday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2006,April,14,Friday,Good Friday,True,True,False
+2006,April,14,Friday,Sinhala and Tamil New Year Day,True,True,True
+2006,May,1,Monday,May Day,True,True,True
+2006,May,12,Friday,Vesak Full Moon Poya Day,True,True,False
+2006,May,13,Saturday,Day following Vesak Full Moon Poya Day,True,True,True
+2006,June,11,Sunday,Poson Full Moon Poya Day,True,True,False
+2006,July,10,Monday,Esala Full Moon Poya Day,True,True,False
+2006,August,9,Wednesday,Nikini Full Moon Poya Day,True,True,False
+2006,September,7,Thursday,Binara Full Moon Poya Day,True,True,False
+2006,October,6,Friday,Vap Full Moon Poya Day,True,True,False
+2006,October,21,Saturday,Deepavali Festival Day,True,True,False
+2006,October,24,Tuesday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2006,November,5,Sunday,Il Full Moon Poya Day,True,True,False
+2006,December,4,Monday,Unduvap Full Moon Poya Day,True,True,False
+2006,December,25,Monday,Christmas Day,True,True,True
+2006,December,31,Sunday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2007,January,3,Wednesday,Duruthu Full Moon Poya Day,True,True,False
+2007,January,15,Monday,Tamil Thai Pongal Day,True,True,True
+2007,February,1,Thursday,Navam Full Moon Poya Day,True,True,False
+2007,February,4,Sunday,Independence Day,True,True,True
+2007,February,5,Monday,Additional Bank Holiday,False,True,False
+2007,February,16,Friday,Maha Sivarathri Day,True,True,False
+2007,March,3,Saturday,Medin Full Moon Poya Day,True,True,False
+2007,April,1,Sunday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2007,April,2,Monday,Bak Full Moon Poya Day,True,True,False
+2007,April,3,Tuesday,Additional Bank Holiday,False,True,False
+2007,April,6,Friday,Good Friday,True,True,False
+2007,April,13,Friday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2007,April,14,Saturday,Sinhala and Tamil New Year Day,True,True,True
+2007,May,1,Tuesday,May Day,True,True,True
+2007,May,1,Tuesday,Vesak Full Moon Poya Day,True,True,False
+2007,May,2,Wednesday,Day following Vesak Full Moon Poya Day,True,True,True
+2007,May,31,Thursday,Adhi Poson Full Moon Poya Day,True,True,False
+2007,June,30,Saturday,Poson Full Moon Poya Day,True,True,False
+2007,July,29,Sunday,Esala Full Moon Poya Day,True,True,False
+2007,August,28,Tuesday,Nikini Full Moon Poya Day,True,True,False
+2007,September,26,Wednesday,Binara Full Moon Poya Day,True,True,False
+2007,October,13,Saturday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2007,October,25,Thursday,Vap Full Moon Poya Day,True,True,False
+2007,November,8,Thursday,Deepavali Festival Day,True,True,False
+2007,November,24,Saturday,Il Full Moon Poya Day,True,True,False
+2007,December,21,Friday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2007,December,23,Sunday,Unduvap Full Moon Poya Day,True,True,False
+2007,December,25,Tuesday,Christmas Day,True,True,True
+2008,January,15,Tuesday,Tamil Thai Pongal Day,True,True,True
+2008,January,22,Tuesday,Duruthu Full Moon Poya Day,True,True,False
+2008,February,4,Monday,Independence Day,True,True,True
+2008,February,20,Wednesday,Navam Full Moon Poya Day,True,True,False
+2008,March,6,Thursday,Maha Sivarathri Day,True,True,False
+2008,March,20,Thursday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2008,March,21,Friday,Good Friday,True,True,False
+2008,March,21,Friday,Medin Full Moon Poya Day,True,True,False
+2008,April,12,Saturday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2008,April,13,Sunday,Sinhala and Tamil New Year Day,True,True,True
+2008,April,18,Friday,Additional Bank Holiday,False,True,False
+2008,April,19,Saturday,Bak Full Moon Poya Day,True,True,False
+2008,May,1,Thursday,May Day,True,True,True
+2008,May,19,Monday,Vesak Full Moon Poya Day,True,True,False
+2008,May,20,Tuesday,Day following Vesak Full Moon Poya Day,True,True,True
+2008,June,18,Wednesday,Poson Full Moon Poya Day,True,True,False
+2008,July,17,Thursday,Esala Full Moon Poya Day,True,True,False
+2008,August,16,Saturday,Nikini Full Moon Poya Day,True,True,False
+2008,September,14,Sunday,Binara Full Moon Poya Day,True,True,False
+2008,October,1,Wednesday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2008,October,14,Tuesday,Vap Full Moon Poya Day,True,True,False
+2008,October,27,Monday,Deepavali Festival Day,True,True,False
+2008,November,12,Wednesday,Il Full Moon Poya Day,True,True,False
+2008,December,9,Tuesday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2008,December,12,Friday,Unduvap Full Moon Poya Day,True,True,False
+2008,December,25,Thursday,Christmas Day,True,True,True
+2009,January,10,Saturday,Duruthu Full Moon Poya Day,True,True,False
+2009,January,14,Wednesday,Tamil Thai Pongal Day,True,True,True
+2009,February,4,Wednesday,Independence Day,True,True,True
+2009,February,9,Monday,Navam Full Moon Poya Day,True,True,False
+2009,February,23,Monday,Maha Sivarathri Day,True,True,False
+2009,April,9,Thursday,Bak Full Moon Poya Day,True,True,False
+2009,April,10,Friday,Good Friday,True,True,False
+2009,April,13,Monday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2009,May,1,Friday,May Day,True,True,True
+2009,May,8,Friday,Vesak Full Moon Poya Day,True,True,False
+2009,May,9,Saturday,Day following Vesak Full Moon Poya Day,True,True,True
+2009,June,7,Sunday,Poson Full Moon Poya Day,True,True,False
+2009,July,6,Monday,Esala Full Moon Poya Day,True,True,False
+2009,August,5,Wednesday,Nikini Full Moon Poya Day,True,True,False
+2009,September,4,Friday,Binara Full Moon Poya Day,True,True,False
+2009,September,21,Monday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2009,October,3,Saturday,Vap Full Moon Poya Day,True,True,False
+2009,October,17,Saturday,Deepavali Festival Day,True,True,False
+2009,November,2,Monday,Il Full Moon Poya Day,True,True,False
+2009,November,28,Saturday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2009,December,25,Friday,Christmas Day,True,True,True
+2009,December,31,Thursday,Duruthu Full Moon Poya Day,True,True,False
+2010,January,14,Thursday,Tamil Thai Pongal Day,True,True,True
+2010,January,29,Friday,Navam Full Moon Poya Day,True,True,False
+2010,February,4,Thursday,Independence Day,True,True,True
+2010,February,27,Saturday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2010,February,28,Sunday,Medin Full Moon Poya Day,True,True,False
+2010,March,13,Saturday,Maha Sivarathri Day,True,True,False
+2010,March,29,Monday,Bak Full Moon Poya Day,True,True,False
+2010,April,2,Friday,Good Friday,True,True,False
+2010,April,14,Wednesday,Sinhala and Tamil New Year Day,True,True,True
+2010,April,28,Wednesday,Vesak Full Moon Poya Day,True,True,False
+2010,May,1,Saturday,May Day,True,True,True
+2010,May,27,Thursday,Vesak Full Moon Poya Day,True,True,False
+2010,May,28,Friday,Day following Vesak Full Moon Poya Day,True,True,True
+2010,June,25,Friday,Poson Full Moon Poya Day,True,True,False
+2010,July,25,Sunday,Esala Full Moon Poya Day,True,True,False
+2010,September,10,Friday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2010,September,22,Wednesday,Binara Full Moon Poya Day,True,True,False
+2010,October,22,Friday,Vap Full Moon Poya Day,True,True,False
+2010,November,5,Friday,Deepavali Festival Day,True,True,False
+2010,November,17,Wednesday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2010,November,21,Sunday,Il Full Moon Poya Day,True,True,False
+2010,December,20,Monday,Unduvap Full Moon Poya Day,True,True,False
+2010,December,25,Saturday,Christmas Day,True,True,True
+2011,January,15,Saturday,Tamil Thai Pongal Day,True,True,True
+2011,January,19,Wednesday,Duruthu Full Moon Poya Day,True,True,False
+2011,February,4,Friday,Independence Day,True,True,True
+2011,February,16,Wednesday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2011,February,17,Thursday,Navam Full Moon Poya Day,True,True,False
+2011,March,2,Wednesday,Maha Sivarathri Day,True,True,False
+2011,March,19,Saturday,Medin Full Moon Poya Day,True,True,False
+2011,April,13,Wednesday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2011,April,14,Thursday,Sinhala and Tamil New Year Day,True,True,True
+2011,April,17,Sunday,Bak Full Moon Poya Day,True,True,False
+2011,April,22,Friday,Good Friday,True,True,False
+2011,May,1,Sunday,May Day,True,True,True
+2011,May,2,Monday,Additional Bank Holiday,False,True,False
+2011,May,17,Tuesday,Vesak Full Moon Poya Day,True,True,False
+2011,May,18,Wednesday,Day following Vesak Full Moon Poya Day,True,True,True
+2011,June,15,Wednesday,Poson Full Moon Poya Day,True,True,False
+2011,July,14,Thursday,Esala Full Moon Poya Day,True,True,False
+2011,August,13,Saturday,Nikini Full Moon Poya Day,True,True,False
+2011,August,31,Wednesday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2011,September,11,Sunday,Binara Full Moon Poya Day,True,True,False
+2011,October,11,Tuesday,Vap Full Moon Poya Day,True,True,False
+2011,October,26,Wednesday,Deepavali Festival Day,True,True,False
+2011,November,6,Sunday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2011,November,10,Thursday,Il Full Moon Poya Day,True,True,False
+2011,December,10,Saturday,Unduvap Full Moon Poya Day,True,True,False
+2011,December,25,Sunday,Christmas Day,True,True,True
+2011,December,26,Monday,Additional Bank Holiday,False,True,False
+2012,January,8,Sunday,Duruthu Full Moon Poya Day,True,True,False
+2012,January,15,Sunday,Tamil Thai Pongal Day,True,True,True
+2012,January,16,Monday,Additional Bank Holiday,False,True,False
+2012,February,4,Saturday,Independence Day,True,True,True
+2012,February,7,Tuesday,Navam Full Moon Poya Day,True,True,False
+2012,February,10,Friday,Additional Bank Holiday,False,True,False
+2012,February,20,Monday,Maha Sivarathri Day,True,True,False
+2012,March,7,Wednesday,Medin Full Moon Poya Day,True,True,False
+2012,April,6,Friday,Bak Full Moon Poya Day,True,True,False
+2012,April,12,Thursday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2012,April,13,Friday,Sinhala and Tamil New Year Day,True,True,True
+2012,May,1,Tuesday,May Day,True,True,True
+2012,May,6,Sunday,Day following Vesak Full Moon Poya Day,True,True,True
+2012,May,7,Monday,Additional Bank Holiday,False,True,False
+2012,June,4,Monday,Poson Full Moon Poya Day,True,True,False
+2012,July,3,Tuesday,Esala Full Moon Poya Day,True,True,False
+2012,August,19,Sunday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2012,August,31,Friday,Binara Full Moon Poya Day,True,True,False
+2012,September,29,Saturday,Binara Full Moon Poya Day,True,True,False
+2012,October,26,Friday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2012,October,29,Monday,Vap Full Moon Poya Day,True,True,False
+2012,November,13,Tuesday,Deepavali Festival Day,True,True,False
+2012,November,27,Tuesday,Il Full Moon Poya Day,True,True,False
+2012,December,25,Tuesday,Christmas Day,True,True,True
+2012,December,27,Thursday,Unduvap Full Moon Poya Day,True,True,False
+2013,January,14,Monday,Tamil Thai Pongal Day,True,True,True
+2013,January,25,Friday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2013,January,26,Saturday,Duruthu Full Moon Poya Day,True,True,False
+2013,February,4,Monday,Independence Day,True,True,True
+2013,February,25,Monday,Navam Full Moon Poya Day,True,True,False
+2013,March,10,Sunday,Maha Sivarathri Day,True,True,False
+2013,March,26,Tuesday,Medin Full Moon Poya Day,True,True,False
+2013,March,29,Friday,Good Friday,True,True,False
+2013,April,13,Saturday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2013,April,14,Sunday,Sinhala and Tamil New Year Day,True,True,True
+2013,April,15,Monday,Additional Bank Holiday,False,True,False
+2013,April,25,Thursday,Bak Full Moon Poya Day,True,True,False
+2013,May,1,Wednesday,May Day,True,True,True
+2013,May,25,Saturday,Day following Vesak Full Moon Poya Day,True,True,True
+2013,June,23,Sunday,Poson Full Moon Poya Day,True,True,False
+2013,July,22,Monday,Esala Full Moon Poya Day,True,True,False
+2013,August,9,Friday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2013,August,20,Tuesday,Nikini Full Moon Poya Day,True,True,False
+2013,September,19,Thursday,Binara Full Moon Poya Day,True,True,False
+2013,October,16,Wednesday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2013,October,18,Friday,Vap Full Moon Poya Day,True,True,False
+2013,November,2,Saturday,Deepavali Festival Day,True,True,False
+2013,November,17,Sunday,Il Full Moon Poya Day,True,True,False
+2013,December,16,Monday,Unduvap Full Moon Poya Day,True,True,False
+2013,December,25,Wednesday,Christmas Day,True,True,True
+2014,January,14,Tuesday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2014,January,14,Tuesday,Tamil Thai Pongal Day,True,True,True
+2014,January,15,Wednesday,Duruthu Full Moon Poya Day,True,True,False
+2014,February,4,Tuesday,Independence Day,True,True,True
+2014,February,14,Friday,Navam Full Moon Poya Day,True,True,False
+2014,February,27,Thursday,Maha Sivarathri Day,True,True,False
+2014,March,16,Sunday,Medin Full Moon Poya Day,True,True,False
+2014,April,13,Sunday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2014,April,14,Monday,Bak Full Moon Poya Day,True,True,False
+2014,April,14,Monday,Sinhala and Tamil New Year Day,True,True,True
+2014,April,15,Tuesday,Special Bank Holiday,False,True,False
+2014,April,18,Friday,Good Friday,True,True,False
+2014,May,1,Thursday,May Day,True,True,True
+2014,May,14,Wednesday,Vesak Full Moon Poya Day,True,True,False
+2014,May,15,Thursday,Day following Vesak Full Moon Poya Day,True,True,True
+2014,June,12,Thursday,Poson Full Moon Poya Day,True,True,False
+2014,July,12,Saturday,Esala Full Moon Poya Day,True,True,False
+2014,July,29,Tuesday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2014,August,10,Sunday,Nikini Full Moon Poya Day,True,True,False
+2014,September,8,Monday,Binara Full Moon Poya Day,True,True,False
+2014,October,5,Sunday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2014,October,8,Wednesday,Vap Full Moon Poya Day,True,True,False
+2014,October,22,Wednesday,Deepavali Festival Day,True,True,False
+2014,November,6,Thursday,Il Full Moon Poya Day,True,True,False
+2014,December,6,Saturday,Unduvap Full Moon Poya Day,True,True,False
+2014,December,25,Thursday,Christmas Day,True,True,True
+2015,January,4,Sunday,Duruthu Full Moon Poya Day,True,True,False
+2015,January,4,Sunday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2015,January,5,Monday,Special Bank Holiday,False,True,False
+2015,January,15,Thursday,Tamil Thai Pongal Day,True,True,True
+2015,February,3,Tuesday,Navam Full Moon Poya Day,True,True,False
+2015,February,4,Wednesday,Independence Day,True,True,True
+2015,February,17,Tuesday,Maha Sivarathri Day,True,True,False
+2015,March,5,Thursday,Medin Full Moon Poya Day,True,True,False
+2015,April,3,Friday,Bak Full Moon Poya Day,True,True,False
+2015,April,3,Friday,Good Friday,True,True,False
+2015,April,13,Monday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2015,April,14,Tuesday,Sinhala and Tamil New Year Day,True,True,True
+2015,May,1,Friday,May Day,True,True,True
+2015,May,3,Sunday,Vesak Full Moon Poya Day,True,True,False
+2015,May,4,Monday,Day following Vesak Full Moon Poya Day,True,True,True
+2015,June,2,Tuesday,Poson Full Moon Poya Day,True,True,False
+2015,July,1,Wednesday,Adhi Esala Full Moon Poya Day,True,True,False
+2015,July,18,Saturday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2015,July,31,Friday,Esala Full Moon Poya Day,True,True,False
+2015,August,29,Saturday,Nikini Full Moon Poya Day,True,True,False
+2015,September,24,Thursday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2015,September,27,Sunday,Binara Full Moon Poya Day,True,True,False
+2015,October,27,Tuesday,Vap Full Moon Poya Day,True,True,False
+2015,November,10,Tuesday,Deepavali Festival Day,True,True,False
+2015,November,25,Wednesday,Il Full Moon Poya Day,True,True,False
+2015,December,24,Thursday,Unduvap Full Moon Poya Day,True,True,False
+2015,December,25,Friday,Christmas Day,True,True,True
+2016,January,15,Friday,Tamil Thai Pongal Day,True,True,True
+2016,January,23,Saturday,Duruthu Full Moon Poya Day,True,True,False
+2016,February,4,Thursday,Independence Day,True,True,False
+2016,February,22,Monday,Navam Full Moon Poya Day,True,True,False
+2016,March,7,Monday,Maha Sivarathri Day,True,True,False
+2016,March,22,Tuesday,Medin Full Moon Poya Day,True,True,False
+2016,April,13,Wednesday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2016,April,14,Thursday,Sinhala and Tamil New Year Day,True,True,True
+2016,April,21,Thursday,Bak Full Moon Poya Day,True,True,False
+2016,May,1,Sunday,May Day,True,True,True
+2016,May,2,Monday,Additional Bank Holiday,False,True,False
+2016,May,21,Saturday,Vesak Full Moon Poya Day,True,True,False
+2016,May,22,Sunday,Day following Vesak Full Moon Poya Day,True,True,False
+2016,May,23,Monday,Additional Bank Holiday,False,True,False
+2016,June,19,Sunday,Poson Full Moon Poya Day,True,True,False
+2016,July,6,Wednesday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2016,July,19,Tuesday,Esala Full Moon Poya Day,True,True,False
+2016,August,17,Wednesday,Nikini Full Moon Poya Day,True,True,True
+2016,September,12,Monday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2016,September,16,Friday,Binara Full Moon Poya Day,True,True,False
+2016,October,15,Saturday,Vap Full Moon Poya Day,True,True,False
+2016,October,29,Saturday,Deepavali Festival Day,True,True,False
+2016,November,14,Monday,Il Full Moon Poya Day,True,True,False
+2016,December,12,Monday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2016,December,13,Tuesday,Unduvap Full Moon Poya Day,True,True,False
+2016,December,25,Sunday,Christmas Day,True,True,False
+2016,December,26,Monday,Additional Bank Holiday,False,True,False
+2017,January,12,Thursday,Duruthu Full Moon Poya Day,True,True,False
+2017,January,14,Saturday,Tamil Thai Pongal Day,True,True,True
+2017,February,4,Saturday,Independence Day,True,True,True
+2017,February,10,Friday,Navam Full Moon Poya Day,True,True,False
+2017,February,24,Friday,Maha Sivarathri Day,True,True,False
+2017,March,12,Sunday,Medin Full Moon Poya Day,True,True,False
+2017,April,10,Monday,Bak Full Moon Poya Day,True,True,False
+2017,April,13,Thursday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2017,April,14,Friday,Good Friday,True,True,False
+2017,April,14,Friday,Sinhala and Tamil New Year Day,True,True,True
+2017,May,1,Monday,May Day,True,True,True
+2017,May,10,Wednesday,Vesak Full Moon Poya Day,True,True,False
+2017,May,11,Thursday,Day following Vesak Full Moon Poya Day,True,True,True
+2017,June,8,Thursday,Poson Full Moon Poya Day,True,True,False
+2017,June,26,Monday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2017,July,8,Saturday,Esala Full Moon Poya Day,True,True,False
+2017,August,7,Monday,Nikini Full Moon Poya Day,True,True,False
+2017,September,1,Friday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2017,September,5,Tuesday,Binara Full Moon Poya Day,True,True,False
+2017,October,5,Thursday,Vap Full Moon Poya Day,True,True,False
+2017,October,18,Wednesday,Deepavali Festival Day,True,True,False
+2017,November,3,Friday,Il Full Moon Poya Day,True,True,False
+2017,December,1,Friday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2017,December,3,Sunday,Unduvap Full Moon Poya Day,True,True,False
+2017,December,25,Monday,Christmas Day,True,True,True
+2018,January,1,Monday,Duruthu Full Moon Poya Day,True,True,False
+2018,January,14,Sunday,Tamil Thai Pongal Day,True,True,True
+2018,January,15,Monday,Special Bank Holiday,False,True,False
+2018,January,31,Wednesday,Navam Full Moon Poya Day,True,True,False
+2018,February,4,Sunday,Independence Day,True,True,True
+2018,February,5,Monday,Special Bank Holiday,False,True,False
+2018,February,13,Tuesday,Maha Sivarathri Day,True,True,False
+2018,March,1,Thursday,Medin Full Moon Poya Day,True,True,False
+2018,March,30,Friday,Good Friday,True,True,False
+2018,March,31,Saturday,Bak Full Moon Poya Day,True,True,False
+2018,April,13,Friday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2018,April,14,Saturday,Sinhala and Tamil New Year Day,True,True,True
+2018,April,29,Sunday,Vesak Full Moon Poya Day,True,True,False
+2018,April,30,Monday,Day following Vesak Full Moon Poya Day,True,True,True
+2018,May,1,Tuesday,May Day,True,True,True
+2018,May,29,Tuesday,Adhi Poson Full Moon Poya Day,True,True,False
+2018,June,15,Friday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2018,June,27,Wednesday,Poson Full Moon Poya Day,True,True,False
+2018,July,27,Friday,Esala Full Moon Poya Day,True,True,False
+2018,August,22,Wednesday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2018,August,25,Saturday,Nikini Full Moon Poya Day,True,True,False
+2018,September,24,Monday,Binara Full Moon Poya Day,True,True,False
+2018,October,24,Wednesday,Vap Full Moon Poya Day,True,True,False
+2018,November,6,Tuesday,Deepavali Festival Day,True,True,False
+2018,November,20,Tuesday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2018,November,22,Thursday,Il Full Moon Poya Day,True,True,False
+2018,December,22,Saturday,Unduvap Full Moon Poya Day,True,True,False
+2018,December,25,Tuesday,Christmas Day,True,True,True
+2019,January,15,Tuesday,Tamil Thai Pongal Day,True,True,True
+2019,January,20,Sunday,Duruthu Full Moon Poya Day,True,True,False
+2019,February,4,Monday,Independence Day,True,True,True
+2019,February,19,Tuesday,Navam Full Moon Poya Day,True,True,False
+2019,March,4,Monday,Maha Sivarathri Day,True,True,False
+2019,March,20,Wednesday,Medin Full Moon Poya Day,True,True,False
+2019,April,13,Saturday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2019,April,14,Sunday,Sinhala and Tamil New Year Day,True,True,True
+2019,April,15,Monday,Special Bank Holiday,False,True,False
+2019,April,19,Friday,Bak Full Moon Poya Day,True,True,False
+2019,April,19,Friday,Good Friday,True,True,False
+2019,May,1,Wednesday,May Day,True,True,True
+2019,May,18,Saturday,Vesak Full Moon Poya Day,True,True,False
+2019,May,19,Sunday,Day following Vesak Full Moon Poya Day,True,True,True
+2019,May,20,Monday,Special Bank Holiday,False,True,False
+2019,June,5,Wednesday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2019,June,16,Sunday,Poson Full Moon Poya Day,True,True,False
+2019,July,16,Tuesday,Esala Full Moon Poya Day,True,True,False
+2019,August,12,Monday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2019,August,14,Wednesday,Nikini Full Moon Poya Day,True,True,False
+2019,September,13,Friday,Binara Full Moon Poya Day,True,True,False
+2019,October,13,Sunday,Vap Full Moon Poya Day,True,True,False
+2019,October,27,Sunday,Deepavali Festival Day,True,True,False
+2019,November,10,Sunday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2019,November,11,Monday,Special Bank Holiday,False,True,False
+2019,November,12,Tuesday,Il Full Moon Poya Day,True,True,False
+2019,December,11,Wednesday,Unduvap Full Moon Poya Day,True,True,False
+2019,December,25,Wednesday,Christmas Day,True,True,True
+2020,January,10,Friday,Duruthu Full Moon Poya Day,True,True,False
+2020,January,15,Wednesday,Tamil Thai Pongal Day,True,True,True
+2020,February,4,Tuesday,Independence Day,True,True,True
+2020,February,8,Saturday,Navam Full Moon Poya Day,True,True,False
+2020,February,21,Friday,Maha Sivarathri Day,True,True,False
+2020,March,9,Monday,Medin Full Moon Poya Day,True,True,False
+2020,April,7,Tuesday,Bak Full Moon Poya Day,True,True,False
+2020,April,10,Friday,Good Friday,True,True,False
+2020,April,12,Sunday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2020,April,13,Monday,Sinhala and Tamil New Year Day,True,True,True
+2020,April,14,Tuesday,Special Bank Holiday,False,True,False
+2020,May,1,Friday,May Day,True,True,True
+2020,May,7,Thursday,Vesak Full Moon Poya Day,True,True,False
+2020,May,8,Friday,Day following Vesak Full Moon Poya Day,True,True,True
+2020,May,25,Monday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2020,June,5,Friday,Poson Full Moon Poya Day,True,True,False
+2020,July,4,Saturday,Esala Full Moon Poya Day,True,True,False
+2020,August,1,Saturday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2020,August,3,Monday,Nikini Full Moon Poya Day,True,True,False
+2020,September,1,Tuesday,Binara Full Moon Poya Day,True,True,False
+2020,October,1,Thursday,Vap Full Moon Poya Day,True,True,False
+2020,October,30,Friday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2020,October,30,Friday,Vap Full Moon Poya Day,True,True,False
+2020,November,14,Saturday,Deepavali Festival Day,True,True,False
+2020,November,29,Sunday,Il Full Moon Poya Day,True,True,False
+2020,December,25,Friday,Christmas Day,True,True,True
+2020,December,29,Tuesday,Unduvap Full Moon Poya Day,True,True,False
+2021,January,14,Thursday,Tamil Thai Pongal Day,True,True,True
+2021,January,28,Thursday,Duruthu Full Moon Poya Day,True,True,False
+2021,February,4,Thursday,Independence Day,True,True,True
+2021,February,26,Friday,Navam Full Moon Poya Day,True,True,False
+2021,March,11,Thursday,Maha Sivarathri Day,True,True,False
+2021,March,28,Sunday,Medin Full Moon Poya Day,True,True,False
+2021,April,2,Friday,Good Friday,True,True,False
+2021,April,13,Tuesday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2021,April,14,Wednesday,Sinhala and Tamil New Year Day,True,True,True
+2021,April,26,Monday,Bak Full Moon Poya Day,True,True,False
+2021,April,30,Friday,Half a day Additional Bank Holiday,False,True,False
+2021,May,1,Saturday,May Day,True,True,True
+2021,May,14,Friday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2021,May,26,Wednesday,Vesak Full Moon Poya Day,True,True,False
+2021,May,27,Thursday,Day following Vesak Full Moon Poya Day,True,True,True
+2021,June,24,Thursday,Poson Full Moon Poya Day,True,True,False
+2021,July,21,Wednesday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2021,July,23,Friday,Esala Full Moon Poya Day,True,True,False
+2021,August,22,Sunday,Nikini Full Moon Poya Day,True,True,False
+2021,October,19,Tuesday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2021,October,20,Wednesday,Vap Full Moon Poya Day,True,True,False
+2021,November,4,Thursday,Deepavali Festival Day,True,True,False
+2021,November,18,Thursday,Il Full Moon Poya Day,True,True,False
+2021,December,18,Saturday,Unduvap Full Moon Poya Day,True,True,False
+2021,December,24,Friday,Half a day Additional Bank Holiday,False,True,False
+2021,December,25,Saturday,Christmas Day,True,True,True
+2022,January,14,Friday,Tamil Thai Pongal Day,True,True,True
+2022,January,17,Monday,Duruthu Full Moon Poya Day,True,True,False
+2022,February,4,Friday,Independence Day,True,True,True
+2022,February,16,Wednesday,Navam Full Moon Poya Day,True,True,False
+2022,March,1,Tuesday,Maha Sivarathri Day,True,True,False
+2022,March,17,Thursday,Medin Full Moon Poya Day,True,True,False
+2022,April,14,Thursday,Sinhala and Tamil New Year Day,True,True,True
+2022,April,15,Friday,Good Friday,True,True,False
+2022,April,16,Saturday,Bak Full Moon Poya Day,True,True,False
+2022,May,1,Sunday,May Day,True,True,True
+2022,May,2,Monday,Additional Bank Holiday,False,True,False
+2022,May,3,Tuesday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2022,May,15,Sunday,Vesak Full Moon Poya Day,True,True,False
+2022,May,16,Monday,Day following Vesak Full Moon Poya Day,True,True,True
+2022,June,14,Tuesday,Poson Full Moon Poya Day,True,True,False
+2022,July,10,Sunday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2022,July,13,Wednesday,Esala Full Moon Poya Day,True,True,False
+2022,August,11,Thursday,Nikini Full Moon Poya Day,True,True,False
+2022,October,9,Sunday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2022,October,9,Sunday,Vap Full Moon Poya Day,True,True,False
+2022,October,24,Monday,Deepavali Festival Day,True,True,False
+2022,November,7,Monday,Il Full Moon Poya Day,True,True,False
+2022,December,7,Wednesday,Unduvap Full Moon Poya Day,True,True,False
+2022,December,25,Sunday,Christmas Day,True,True,True
+2022,December,26,Monday,Additional Bank Holiday,True,True,False
+2023,January,6,Friday,Duruthu Full Moon Poya Day,True,True,False
+2023,January,15,Sunday,Tamil Thai Pongal Day,True,True,True
+2023,January,16,Monday,Special Bank Holiday,False,True,False
+2023,February,4,Saturday,Independence Day,True,True,True
+2023,February,5,Sunday,Navam Full Moon Poya Day,True,True,False
+2023,February,18,Saturday,Maha Sivarathri Day,True,True,False
+2023,March,6,Monday,Medin Full Moon Poya Day,True,True,False
+2023,April,5,Wednesday,Bak Full Moon Poya Day,True,True,False
+2023,April,7,Friday,Good Friday,True,True,False
+2023,April,13,Thursday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2023,April,14,Friday,Sinhala and Tamil New Year Day,True,True,True
+2023,April,22,Saturday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2023,May,1,Monday,May Day,True,True,True
+2023,May,5,Friday,Vesak Full Moon Poya Day,True,True,False
+2023,May,6,Saturday,Day following Vesak Full Moon Poya Day,True,True,True
+2023,June,3,Saturday,Poson Full Moon Poya Day,True,True,False
+2023,June,29,Thursday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2023,July,3,Monday,Esala Full Moon Poya Day,True,True,False
+2023,August,1,Tuesday,Esala Full Moon Poya Day,True,True,False
+2023,August,30,Wednesday,Nikini Full Moon Poya Day,True,True,False
+2023,September,28,Thursday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2023,September,29,Friday,Binara Full Moon Poya Day,True,True,False
+2023,October,28,Saturday,Vap Full Moon Poya Day,True,True,False
+2023,November,12,Sunday,Deepavali Festival Day,True,True,False
+2023,November,26,Sunday,Il Full Moon Poya Day,True,True,False
+2023,December,25,Monday,Christmas Day,True,True,True
+2023,December,26,Tuesday,Unduvap Full Moon Poya Day,True,True,False
+2024,January,15,Monday,Tamil Thai Pongal Day,True,True,True
+2024,January,25,Thursday,Duruthu Full Moon Poya Day,True,True,False
+2024,February,4,Sunday,Independence Day,True,True,True
+2024,February,23,Friday,Navam Full Moon Poya Day,True,True,False
+2024,March,8,Friday,Maha Sivarathri Day,True,True,False
+2024,March,24,Sunday,Medin Full Moon Poya Day,True,True,False
+2024,March,29,Friday,Good Friday,True,True,False
+2024,April,11,Thursday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2024,April,12,Friday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2024,April,13,Saturday,Sinhala and Tamil New Year Day,True,True,True
+2024,April,23,Tuesday,Bak Full Moon Poya Day,True,True,False
+2024,May,23,Thursday,Vesak Full Moon Poya Day,True,True,False
+2024,May,24,Friday,Day following Vesak Full Moon Poya Day,True,True,True
+2024,June,17,Monday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2024,June,21,Friday,Poson Full Moon Poya Day,True,True,False
+2024,July,20,Saturday,Esala Full Moon Poya Day,True,True,False
+2024,August,19,Monday,Nikini Full Moon Poya Day,True,True,False
+2024,September,16,Monday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2024,September,17,Tuesday,Binara Full Moon Poya Day,True,True,False
+2024,October,17,Thursday,Vap Full Moon Poya Day,True,True,False
+2024,October,31,Thursday,Deepavali Festival Day,True,True,False
+2024,November,15,Friday,Il Full Moon Poya Day,True,True,False
+2024,December,14,Saturday,Unduvap Full Moon Poya Day,True,True,False
+2024,December,25,Wednesday,Christmas Day,True,True,True
+2025,January,13,Monday,Duruthu Full Moon Poya Day,True,True,False
+2025,January,14,Tuesday,Tamil Thai Pongal Day,True,True,True
+2025,February,4,Tuesday,Independence Day,True,True,True
+2025,February,12,Wednesday,Navam Full Moon Poya Day,True,True,False
+2025,February,26,Wednesday,Maha Sivarathri Day,True,True,False
+2025,March,13,Thursday,Medin Full Moon Poya Day,True,True,False
+2025,March,31,Monday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2025,April,12,Saturday,Bak Full Moon Poya Day,True,True,False
+2025,April,13,Sunday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2025,April,14,Monday,Sinhala and Tamil New Year Day,True,True,True
+2025,April,15,Tuesday,Special Bank Holiday,False,True,False
+2025,April,18,Friday,Good Friday,True,True,False
+2025,May,1,Thursday,May Day,True,True,True
+2025,May,12,Monday,Vesak Full Moon Poya Day,True,True,False
+2025,May,13,Tuesday,Day following Vesak Full Moon Poya Day,True,True,True
+2025,June,7,Saturday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2025,June,10,Tuesday,Poson Full Moon Poya Day,True,True,False
+2025,July,10,Thursday,Esala Full Moon Poya Day,True,True,False
+2025,August,8,Friday,Nikini Full Moon Poya Day,True,True,False
+2025,September,5,Friday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2025,September,7,Sunday,Binara Full Moon Poya Day,True,True,False
+2025,October,6,Monday,Vap Full Moon Poya Day,True,True,False
+2025,October,20,Monday,Deepavali Festival Day,True,True,False
+2025,November,5,Wednesday,Il Full Moon Poya Day,True,True,False
+2025,December,4,Thursday,Unduvap Full Moon Poya Day,True,True,False
+2025,December,25,Thursday,Christmas Day,True,True,True
+2026,January,3,Saturday,Duruthu Full Moon Poya Day,True,True,False
+2026,January,15,Thursday,Tamil Thai Pongal Day,True,True,True
+2026,February,1,Sunday,Navam Full Moon Poya Day,True,True,False
+2026,February,4,Wednesday,Independence Day,True,True,True
+2026,February,15,Sunday,Maha Sivarathri Day,True,True,False
+2026,March,2,Monday,Medin Full Moon Poya Day,True,True,False
+2026,March,21,Saturday,Id-Ul-Fitr (Ramazan Festival Day),True,True,False
+2026,April,1,Wednesday,Bak Full Moon Poya Day,True,True,False
+2026,April,3,Friday,Good Friday,True,True,False
+2026,April,13,Monday,Day prior to Sinhala and Tamil New Year Day,True,True,True
+2026,April,14,Tuesday,Sinhala and Tamil New Year Day,True,True,True
+2026,May,1,Friday,May Day,True,True,True
+2026,May,1,Friday,Vesak Full Moon Poya Day,True,True,False
+2026,May,2,Saturday,Day following Vesak Full Moon Poya Day,True,True,True
+2026,May,28,Thursday,Id-Ul-Alha (Hadji Festival Day),True,True,False
+2026,May,30,Saturday,Poson Full Moon Poya Day,True,True,False
+2026,June,29,Monday,Poson Full Moon Poya Day,True,True,False
+2026,July,29,Wednesday,Esala Full Moon Poya Day,True,True,False
+2026,August,26,Wednesday,Milad-Un-Nabi (Holy Prophet's Birthday),True,True,True
+2026,August,27,Thursday,Nikini Full Moon Poya Day,True,True,False
+2026,September,26,Saturday,Binara Full Moon Poya Day,True,True,False
+2026,October,25,Sunday,Vap Full Moon Poya Day,True,True,False
+2026,November,8,Sunday,Deepavali Festival Day,True,True,False
+2026,November,24,Tuesday,Il Full Moon Poya Day,True,True,False
+2026,December,23,Wednesday,Unduvap Full Moon Poya Day,True,True,False
+2026,December,25,Friday,Christmas Day,True,True,True
