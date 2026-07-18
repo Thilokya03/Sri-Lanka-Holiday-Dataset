@@ -1,21 +1,20 @@
-name: CD - Publish Holiday Dataset
+name: CD - Publish Sri Lanka Holiday Dataset
 
 on:
-  # Runs when CSV changes are committed or merged into main
   push:
     branches:
       - main
     paths:
-      - "csv/*.csv"
+      - "csv/Combined_holidays.csv"
+      - "csv/Sri_Lanka_all_dates.csv"
 
-  # Allows manual publishing
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: holiday-dataset-publication
+  group: sri-lanka-holiday-dataset-publication
   cancel-in-progress: false
 
 env:
@@ -32,7 +31,7 @@ jobs:
 
     steps:
       # ---------------------------------------------------------
-      # 1. Checkout the committed repository
+      # 1. Checkout repository
       # ---------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -48,20 +47,20 @@ jobs:
           python-version: "3.12"
 
       # ---------------------------------------------------------
-      # 3. Install Kaggle CLI
+      # 3. Install required packages
       # ---------------------------------------------------------
-      - name: Install Kaggle CLI
+      - name: Install dependencies
         shell: bash
         run: |
           set -euo pipefail
 
           python -m pip install --upgrade pip
-          python -m pip install --upgrade kaggle
+          python -m pip install pandas kaggle
 
           kaggle --version
 
       # ---------------------------------------------------------
-      # 4. Validate required settings
+      # 4. Validate GitHub and Kaggle settings
       # ---------------------------------------------------------
       - name: Validate publication settings
         shell: bash
@@ -87,16 +86,14 @@ jobs:
           echo "${KAGGLE_DATASET_OWNER}/${KAGGLE_DATASET_SLUG}"
 
       # ---------------------------------------------------------
-      # 5. Check required CSV files
+      # 5. Check source dataset files
       # ---------------------------------------------------------
-      - name: Check dataset files
+      - name: Check source files
         shell: bash
         run: |
           set -euo pipefail
 
           REQUIRED_FILES=(
-            "csv/CBS_holidays.csv"
-            "csv/Document_gov_holidays.csv"
             "csv/Combined_holidays.csv"
             "csv/Sri_Lanka_all_dates.csv"
           )
@@ -115,11 +112,481 @@ jobs:
             echo "Found: $file"
           done
 
-          echo ""
-          ls -lh csv/*.csv
+          ls -lh \
+            csv/Combined_holidays.csv \
+            csv/Sri_Lanka_all_dates.csv
 
       # ---------------------------------------------------------
-      # 6. Generate release information
+      # 6. Prepare only the public release files
+      # ---------------------------------------------------------
+      - name: Prepare publication files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p publish
+
+          # Complete calendar dataset
+          cp \
+            csv/Sri_Lanka_all_dates.csv \
+            publish/Sri_Lanka_all_dates.csv
+
+          # Rename the holiday-only dataset for publication
+          cp \
+            csv/Combined_holidays.csv \
+            publish/Sri_Lankan_Holiday_Dataset.csv
+
+          echo "Prepared files:"
+          ls -lh publish
+
+      # ---------------------------------------------------------
+      # 7. Validate datasets and generate documentation
+      # ---------------------------------------------------------
+      - name: Validate datasets and create documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python - <<'PY'
+          from pathlib import Path
+
+          import pandas as pd
+
+
+          PUBLISH_DIRECTORY = Path("publish")
+
+          ALL_DATES_PATH = (
+              PUBLISH_DIRECTORY
+              / "Sri_Lanka_all_dates.csv"
+          )
+
+          HOLIDAYS_PATH = (
+              PUBLISH_DIRECTORY
+              / "Sri_Lankan_Holiday_Dataset.csv"
+          )
+
+          DOCUMENTATION_PATH = (
+              PUBLISH_DIRECTORY
+              / "DATASET_DOCUMENTATION.md"
+          )
+
+
+          BOOLEAN_COLUMNS = [
+              "Is_Holiday",
+              "Is_Public_Holiday",
+              "Is_Bank_Holiday",
+              "Is_Mercantile_Holiday",
+              "Is_Poya_Day",
+              "Is_Weekend",
+          ]
+
+
+          COLUMN_DESCRIPTIONS = {
+              "Full_Date": (
+                  "The complete date in ISO `YYYY-MM-DD` format."
+              ),
+              "Year": (
+                  "The four-digit calendar year."
+              ),
+              "Month": (
+                  "The English name of the calendar month."
+              ),
+              "Date": (
+                  "The day number within the month."
+              ),
+              "Day": (
+                  "The English name of the weekday."
+              ),
+              "Holiday_Name": (
+                  "The holiday name. Multiple holidays on the same "
+                  "date are separated using ` / `. This is empty for "
+                  "ordinary dates in the complete calendar dataset."
+              ),
+              "Is_Holiday": (
+                  "Indicates whether the date is treated as a holiday."
+              ),
+              "Is_Public_Holiday": (
+                  "Indicates whether the date is a public holiday."
+              ),
+              "Is_Bank_Holiday": (
+                  "Indicates whether the date is a bank holiday. "
+                  "Saturdays and Sundays are marked as bank holidays "
+                  "in the complete calendar dataset."
+              ),
+              "Is_Mercantile_Holiday": (
+                  "Indicates whether the date is a mercantile holiday."
+              ),
+              "Is_Poya_Day": (
+                  "Indicates whether the holiday is a Full Moon "
+                  "Poya Day."
+              ),
+              "Is_Weekend": (
+                  "Indicates whether the date is Saturday or Sunday."
+              ),
+          }
+
+
+          def convert_to_boolean(value):
+              if pd.isna(value):
+                  return False
+
+              if isinstance(value, bool):
+                  return value
+
+              if isinstance(value, (int, float)):
+                  return value != 0
+
+              return str(value).strip().casefold() in {
+                  "true",
+                  "1",
+                  "yes",
+                  "y",
+                  "t",
+              }
+
+
+          def validate_dates(
+              dataframe,
+              dataset_name,
+              require_complete_calendar=False,
+          ):
+              if dataframe.empty:
+                  raise ValueError(
+                      f"{dataset_name} is empty."
+                  )
+
+              if "Full_Date" not in dataframe.columns:
+                  raise ValueError(
+                      f"{dataset_name} does not contain Full_Date."
+                  )
+
+              dates = pd.to_datetime(
+                  dataframe["Full_Date"],
+                  errors="coerce",
+              )
+
+              if dates.isna().any():
+                  invalid_rows = dataframe.loc[
+                      dates.isna(),
+                      ["Full_Date"],
+                  ]
+
+                  raise ValueError(
+                      f"{dataset_name} contains invalid dates:\n"
+                      + invalid_rows.to_string(index=False)
+                  )
+
+              if dates.duplicated().any():
+                  duplicate_rows = dataframe.loc[
+                      dates.duplicated(keep=False),
+                      [
+                          "Full_Date",
+                          "Holiday_Name",
+                      ],
+                  ]
+
+                  raise ValueError(
+                      f"{dataset_name} contains duplicate dates:\n"
+                      + duplicate_rows.to_string(index=False)
+                  )
+
+              if not dates.is_monotonic_increasing:
+                  raise ValueError(
+                      f"{dataset_name} is not sorted by date."
+                  )
+
+              if require_complete_calendar:
+                  if dates.min() != pd.Timestamp("2005-01-01"):
+                      raise ValueError(
+                          "Sri_Lanka_all_dates.csv must start "
+                          "from 2005-01-01."
+                      )
+
+                  date_differences = dates.diff().dropna()
+
+                  if not date_differences.eq(
+                      pd.Timedelta(days=1)
+                  ).all():
+                      raise ValueError(
+                          "Sri_Lanka_all_dates.csv contains "
+                          "missing calendar dates."
+                      )
+
+              return dates
+
+
+          def create_column_table(columns):
+              rows = [
+                  "| Column | Description |",
+                  "|---|---|",
+              ]
+
+              for column in columns:
+                  description = COLUMN_DESCRIPTIONS.get(
+                      column,
+                      "Dataset field.",
+                  )
+
+                  rows.append(
+                      f"| `{column}` | {description} |"
+                  )
+
+              return "\n".join(rows)
+
+
+          all_dates_df = pd.read_csv(
+              ALL_DATES_PATH
+          )
+
+          holidays_df = pd.read_csv(
+              HOLIDAYS_PATH
+          )
+
+          all_dates = validate_dates(
+              all_dates_df,
+              "Sri_Lanka_all_dates.csv",
+              require_complete_calendar=True,
+          )
+
+          holiday_dates = validate_dates(
+              holidays_df,
+              "Sri_Lankan_Holiday_Dataset.csv",
+          )
+
+          for column in BOOLEAN_COLUMNS:
+              if column in all_dates_df.columns:
+                  all_dates_df[column] = (
+                      all_dates_df[column]
+                      .apply(convert_to_boolean)
+                  )
+
+          required_all_dates_columns = {
+              "Full_Date",
+              "Year",
+              "Month",
+              "Date",
+              "Day",
+              "Holiday_Name",
+              "Is_Holiday",
+              "Is_Public_Holiday",
+              "Is_Bank_Holiday",
+              "Is_Mercantile_Holiday",
+              "Is_Poya_Day",
+              "Is_Weekend",
+          }
+
+          missing_all_dates_columns = (
+              required_all_dates_columns
+              - set(all_dates_df.columns)
+          )
+
+          if missing_all_dates_columns:
+              raise ValueError(
+                  "Sri_Lanka_all_dates.csv is missing columns: "
+                  + ", ".join(
+                      sorted(missing_all_dates_columns)
+                  )
+              )
+
+          required_holiday_columns = {
+              "Full_Date",
+              "Year",
+              "Month",
+              "Date",
+              "Day",
+              "Holiday_Name",
+              "Is_Public_Holiday",
+              "Is_Bank_Holiday",
+              "Is_Mercantile_Holiday",
+              "Is_Poya_Day",
+          }
+
+          missing_holiday_columns = (
+              required_holiday_columns
+              - set(holidays_df.columns)
+          )
+
+          if missing_holiday_columns:
+              raise ValueError(
+                  "Sri_Lankan_Holiday_Dataset.csv is missing "
+                  "columns: "
+                  + ", ".join(
+                      sorted(missing_holiday_columns)
+                  )
+              )
+
+          # Verify every weekend is marked as a bank holiday
+          weekend_rows = all_dates_df[
+              all_dates_df["Is_Weekend"]
+          ]
+
+          invalid_weekends = weekend_rows[
+              ~weekend_rows["Is_Bank_Holiday"]
+          ]
+
+          if not invalid_weekends.empty:
+              raise ValueError(
+                  "Some weekends are not marked as "
+                  "bank holidays."
+              )
+
+          all_dates_holiday_count = int(
+              all_dates_df["Is_Holiday"].sum()
+          )
+
+          weekend_count = int(
+              all_dates_df["Is_Weekend"].sum()
+          )
+
+          documentation = f"""# Sri Lanka Holiday Dataset
+
+          ## Overview
+
+          This dataset provides Sri Lankan holiday information from
+          **January 1, 2005 onward**.
+
+          It contains a complete daily calendar dataset and a
+          holiday-only dataset. The data includes public holidays,
+          bank holidays, mercantile holidays, Full Moon Poya Days,
+          weekends, and holiday names.
+
+          ## Published Files
+
+          ### 1. `Sri_Lanka_all_dates.csv`
+
+          This is the complete calendar dataset.
+
+          It contains one row for every calendar date, including
+          ordinary working days, weekends, and official holidays.
+
+          - Rows: **{len(all_dates_df):,}**
+          - Start date: **{all_dates.min().date()}**
+          - End date: **{all_dates.max().date()}**
+          - Dates marked as holidays: **{all_dates_holiday_count:,}**
+          - Weekend dates: **{weekend_count:,}**
+
+          Ordinary non-holiday dates have an empty `Holiday_Name`.
+          Saturdays and Sundays are marked as bank holidays.
+
+          #### Columns
+
+          {create_column_table(all_dates_df.columns)}
+
+          ### 2. `Sri_Lankan_Holiday_Dataset.csv`
+
+          This is the holiday-only dataset.
+
+          It is generated from the repository file
+          `Combined_holidays.csv` and renamed during publication.
+
+          It contains only dates that have a named public, bank,
+          mercantile, or Poya holiday record.
+
+          - Rows: **{len(holidays_df):,}**
+          - Start date: **{holiday_dates.min().date()}**
+          - End date: **{holiday_dates.max().date()}**
+
+          When multiple holidays occur on the same date, the holiday
+          names are combined using ` / `.
+
+          #### Columns
+
+          {create_column_table(holidays_df.columns)}
+
+          ## Boolean Values
+
+          Boolean columns use:
+
+          - `True` — the date belongs to that holiday category
+          - `False` — the date does not belong to that category
+
+          ## Data-Combination Method
+
+          - Before 2019, historical government calendar data is used.
+          - From 2019 onward, the CBS holiday dataset is used as the
+            reference for dates and holiday names.
+          - Supporting government-document data may contribute
+            holiday-category Boolean values.
+          - Equivalent holiday records are consolidated.
+          - Different holidays occurring on the same date are joined
+            using ` / `.
+          - Every Saturday and Sunday is marked as a bank holiday in
+            `Sri_Lanka_all_dates.csv`.
+
+          ## Quality Checks
+
+          The automated publication workflow checks that:
+
+          - Both CSV files exist and are not empty.
+          - Dates are valid and sorted chronologically.
+          - The complete dataset starts from `2005-01-01`.
+          - No calendar dates are missing from the complete dataset.
+          - There is no more than one row for the same date.
+          - Required columns are present.
+          - Every weekend is marked as a bank holiday.
+
+          ## Suggested Uses
+
+          This dataset may be useful for:
+
+          - Time-series forecasting
+          - Electricity-demand forecasting
+          - Financial and banking analysis
+          - Workforce and attendance planning
+          - Public-service planning
+          - Retail and transport-demand analysis
+          - Calendar applications
+          - Machine-learning feature engineering
+
+          ## Important Note
+
+          This dataset is prepared from publicly available calendar
+          information. Users should verify important dates against
+          current official Sri Lankan announcements, particularly
+          when using the data for legal, financial, operational, or
+          compliance decisions.
+
+          ## Repository
+
+          Source code and the automated update pipeline are available
+          in the GitHub repository:
+
+          `Thilokya03/Sri-Lanka-Holiday-Dataset`
+          """
+
+          # Remove indentation introduced by the Python block
+          documentation = "\n".join(
+              line.strip()
+              if line.startswith("          ")
+              else line
+              for line in documentation.splitlines()
+          ).strip() + "\n"
+
+          DOCUMENTATION_PATH.write_text(
+              documentation,
+              encoding="utf-8",
+          )
+
+          print("=" * 65)
+          print("Dataset validation passed.")
+          print(
+              f"Complete dataset rows: {len(all_dates_df):,}"
+          )
+          print(
+              f"Holiday dataset rows: {len(holidays_df):,}"
+          )
+          print(
+              f"Documentation created: {DOCUMENTATION_PATH}"
+          )
+          print("=" * 65)
+          PY
+
+          echo ""
+          echo "Final publication files:"
+          ls -lh publish
+
+      # ---------------------------------------------------------
+      # 8. Generate release information
       # ---------------------------------------------------------
       - name: Generate release information
         id: release
@@ -141,113 +608,7 @@ jobs:
           echo "message=${VERSION_MESSAGE}" >> "$GITHUB_OUTPUT"
 
       # ---------------------------------------------------------
-      # 7. Prepare GitHub Release assets
-      # ---------------------------------------------------------
-      - name: Prepare GitHub Release assets
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          mkdir -p release
-
-          cp csv/CBS_holidays.csv \
-            release/CBS_holidays.csv
-
-          cp csv/Document_gov_holidays.csv \
-            release/Document_gov_holidays.csv
-
-          cp csv/Combined_holidays.csv \
-            release/Combined_holidays.csv
-
-          cp csv/Sri_Lanka_all_dates.csv \
-            release/Sri_Lanka_all_dates.csv
-
-          cd release
-
-          sha256sum \
-            CBS_holidays.csv \
-            Document_gov_holidays.csv \
-            Combined_holidays.csv \
-            Sri_Lanka_all_dates.csv \
-            > SHA256SUMS.txt
-
-          python - <<'PY'
-          from pathlib import Path
-          from zipfile import ZIP_DEFLATED, ZipFile
-
-
-          release_directory = Path(".")
-
-          files = [
-              release_directory / "CBS_holidays.csv",
-              release_directory / "Document_gov_holidays.csv",
-              release_directory / "Combined_holidays.csv",
-              release_directory / "Sri_Lanka_all_dates.csv",
-              release_directory / "SHA256SUMS.txt",
-          ]
-
-          output_file = (
-              release_directory
-              / "Sri_Lanka_Holiday_Dataset.zip"
-          )
-
-          with ZipFile(
-              output_file,
-              mode="w",
-              compression=ZIP_DEFLATED,
-          ) as archive:
-              for file_path in files:
-                  archive.write(
-                      file_path,
-                      arcname=file_path.name,
-                  )
-
-          print(f"Created {output_file}")
-          PY
-
-          ls -lh
-
-      # ---------------------------------------------------------
-      # 8. Create GitHub Release notes
-      # ---------------------------------------------------------
-      - name: Create GitHub Release notes
-        shell: bash
-        env:
-          RELEASE_DATE: ${{ steps.release.outputs.date }}
-          SHORT_SHA: ${{ steps.release.outputs.short_sha }}
-        run: |
-          cat > release-notes.md <<EOF
-          ## Sri Lanka Holiday Dataset
-
-          This release contains the latest committed Sri Lanka
-          holiday datasets.
-
-          ### Files
-
-          - \`CBS_holidays.csv\`
-          - \`Document_gov_holidays.csv\`
-          - \`Combined_holidays.csv\`
-          - \`Sri_Lanka_all_dates.csv\`
-          - \`Sri_Lanka_Holiday_Dataset.zip\`
-          - \`SHA256SUMS.txt\`
-
-          ### Coverage
-
-          The complete dataset contains every date beginning from
-          \`2005-01-01\`.
-
-          It includes public, bank, mercantile, Poya Day, weekend,
-          and general holiday indicators.
-
-          ### Release details
-
-          - Date: ${RELEASE_DATE}
-          - Commit: \`${GITHUB_SHA}\`
-          - Short commit: \`${SHORT_SHA}\`
-          EOF
-
-      # ---------------------------------------------------------
-      # 9. Publish GitHub Release
+      # 9. Publish only the three files to GitHub Releases
       # ---------------------------------------------------------
       - name: Publish GitHub Release
         shell: bash
@@ -258,44 +619,43 @@ jobs:
         run: |
           set -euo pipefail
 
-          ASSETS=(
-            "release/CBS_holidays.csv"
-            "release/Document_gov_holidays.csv"
-            "release/Combined_holidays.csv"
-            "release/Sri_Lanka_all_dates.csv"
-            "release/Sri_Lanka_Holiday_Dataset.zip"
-            "release/SHA256SUMS.txt"
+          RELEASE_FILES=(
+            "publish/Sri_Lanka_all_dates.csv"
+            "publish/Sri_Lankan_Holiday_Dataset.csv"
+            "publish/DATASET_DOCUMENTATION.md"
           )
 
-          if gh release view "$RELEASE_TAG" \
+          if gh release view "${RELEASE_TAG}" \
             >/dev/null 2>&1; then
 
-            echo "GitHub Release already exists. Updating it."
+            echo "Release already exists. Updating files."
 
             gh release upload \
-              "$RELEASE_TAG" \
-              "${ASSETS[@]}" \
+              "${RELEASE_TAG}" \
+              "${RELEASE_FILES[@]}" \
               --clobber
 
             gh release edit \
-              "$RELEASE_TAG" \
-              --title "$RELEASE_TITLE" \
-              --notes-file release-notes.md \
+              "${RELEASE_TAG}" \
+              --title "${RELEASE_TITLE}" \
+              --notes-file \
+                publish/DATASET_DOCUMENTATION.md \
               --latest
           else
             echo "Creating GitHub Release."
 
             gh release create \
-              "$RELEASE_TAG" \
-              "${ASSETS[@]}" \
-              --target "$GITHUB_SHA" \
-              --title "$RELEASE_TITLE" \
-              --notes-file release-notes.md \
+              "${RELEASE_TAG}" \
+              "${RELEASE_FILES[@]}" \
+              --target "${GITHUB_SHA}" \
+              --title "${RELEASE_TITLE}" \
+              --notes-file \
+                publish/DATASET_DOCUMENTATION.md \
               --latest
           fi
 
       # ---------------------------------------------------------
-      # 10. Prepare Kaggle dataset folder
+      # 10. Prepare Kaggle upload folder
       # ---------------------------------------------------------
       - name: Prepare Kaggle dataset
         shell: bash
@@ -304,22 +664,19 @@ jobs:
 
           mkdir -p kaggle-dataset
 
-          cp csv/CBS_holidays.csv \
-            kaggle-dataset/CBS_holidays.csv
-
-          cp csv/Document_gov_holidays.csv \
-            kaggle-dataset/Document_gov_holidays.csv
-
-          cp csv/Combined_holidays.csv \
-            kaggle-dataset/Combined_holidays.csv
-
-          cp csv/Sri_Lanka_all_dates.csv \
+          cp \
+            publish/Sri_Lanka_all_dates.csv \
             kaggle-dataset/Sri_Lanka_all_dates.csv
 
-          # Use CC-BY-4.0 when no licence variable was supplied.
-          export EFFECTIVE_KAGGLE_LICENSE="${
-            KAGGLE_LICENSE:-CC-BY-4.0
-          }"
+          cp \
+            publish/Sri_Lankan_Holiday_Dataset.csv \
+            kaggle-dataset/Sri_Lankan_Holiday_Dataset.csv
+
+          cp \
+            publish/DATASET_DOCUMENTATION.md \
+            kaggle-dataset/DATASET_DOCUMENTATION.md
+
+          export EFFECTIVE_KAGGLE_LICENSE="${KAGGLE_LICENSE:-CC-BY-4.0}"
 
           python - <<'PY'
           import json
@@ -342,6 +699,12 @@ jobs:
                       "name": license_name,
                   }
               ],
+              "description": (
+                  "A complete Sri Lankan daily calendar dataset "
+                  "from 2005 onward, together with a holiday-only "
+                  "dataset containing public, bank, mercantile, "
+                  "Poya Day, and weekend indicators."
+              ),
           }
 
           metadata_path = (
@@ -364,11 +727,12 @@ jobs:
           )
           PY
 
-          echo "Kaggle upload files:"
+          echo ""
+          echo "Kaggle upload folder:"
           ls -lh kaggle-dataset
 
       # ---------------------------------------------------------
-      # 11. Create or update Kaggle Dataset
+      # 11. Create or update Kaggle dataset
       # ---------------------------------------------------------
       - name: Publish to Kaggle
         shell: bash
@@ -377,26 +741,24 @@ jobs:
         run: |
           set -euo pipefail
 
-          DATASET_ID="${
-            KAGGLE_DATASET_OWNER
-          }/${
-            KAGGLE_DATASET_SLUG
-          }"
+          DATASET_ID="${KAGGLE_DATASET_OWNER}/${KAGGLE_DATASET_SLUG}"
 
           echo "Publishing Kaggle dataset: ${DATASET_ID}"
 
-          if kaggle datasets status "$DATASET_ID" \
+          if kaggle datasets status "${DATASET_ID}" \
             >/tmp/kaggle-status.txt 2>&1; then
 
-            echo "Kaggle dataset already exists."
-            echo "Creating a new dataset version."
+            echo "Kaggle dataset exists."
+            echo "Creating a new version."
 
             kaggle datasets version \
               -p kaggle-dataset \
-              -m "$VERSION_MESSAGE"
+              -m "${VERSION_MESSAGE}"
           else
-            echo "Kaggle dataset does not exist yet."
-            echo "Creating the first public dataset version."
+            echo "Kaggle dataset does not exist."
+            echo "Creating the first public version."
+
+            cat /tmp/kaggle-status.txt || true
 
             kaggle datasets create \
               -p kaggle-dataset \
@@ -404,7 +766,7 @@ jobs:
           fi
 
       # ---------------------------------------------------------
-      # 12. Show publication results
+      # 12. Show published URLs
       # ---------------------------------------------------------
       - name: Show publication results
         shell: bash
@@ -415,16 +777,12 @@ jobs:
           set -euo pipefail
 
           GITHUB_RELEASE_URL="$(
-            gh release view "$RELEASE_TAG" \
+            gh release view "${RELEASE_TAG}" \
               --json url \
               --jq '.url'
           )"
 
-          KAGGLE_DATASET_URL="https://www.kaggle.com/datasets/${
-            KAGGLE_DATASET_OWNER
-          }/${
-            KAGGLE_DATASET_SLUG
-          }"
+          KAGGLE_DATASET_URL="https://www.kaggle.com/datasets/${KAGGLE_DATASET_OWNER}/${KAGGLE_DATASET_SLUG}"
 
           echo "::notice::GitHub Release: ${GITHUB_RELEASE_URL}"
           echo "::notice::Kaggle Dataset: ${KAGGLE_DATASET_URL}"
