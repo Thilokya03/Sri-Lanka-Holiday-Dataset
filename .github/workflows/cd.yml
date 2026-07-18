@@ -660,79 +660,190 @@ jobs:
       - name: Prepare Kaggle dataset
         shell: bash
         run: |
-          set -euo pipefail
+            set -euo pipefail
 
-          mkdir -p kaggle-dataset
+            mkdir -p kaggle-dataset
 
-          cp \
+            cp \
             publish/Sri_Lanka_all_dates.csv \
             kaggle-dataset/Sri_Lanka_all_dates.csv
 
-          cp \
+            cp \
             publish/Sri_Lankan_Holiday_Dataset.csv \
             kaggle-dataset/Sri_Lankan_Holiday_Dataset.csv
 
-          cp \
+            cp \
             publish/DATASET_DOCUMENTATION.md \
             kaggle-dataset/DATASET_DOCUMENTATION.md
 
-          export EFFECTIVE_KAGGLE_LICENSE="${KAGGLE_LICENSE:-CC-BY-4.0}"
+            export EFFECTIVE_KAGGLE_LICENSE="${KAGGLE_LICENSE:-CC-BY-4.0}"
 
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
+            python - <<'PY'
+            import json
+            import os
+            from pathlib import Path
 
 
-          owner = os.environ["KAGGLE_DATASET_OWNER"]
-          slug = os.environ["KAGGLE_DATASET_SLUG"]
+            owner = os.environ["KAGGLE_DATASET_OWNER"]
+            slug = os.environ["KAGGLE_DATASET_SLUG"]
+            license_name = os.environ["EFFECTIVE_KAGGLE_LICENSE"]
 
-          license_name = os.environ[
-              "EFFECTIVE_KAGGLE_LICENSE"
-          ]
+            description = """
+            # Sri Lanka Holiday Dataset
 
-          metadata = {
-              "title": "Sri Lanka Holiday Dataset",
-              "id": f"{owner}/{slug}",
-              "licenses": [
-                  {
-                      "name": license_name,
-                  }
-              ],
-              "description": (
-                  "A complete Sri Lankan daily calendar dataset "
-                  "from 2005 onward, together with a holiday-only "
-                  "dataset containing public, bank, mercantile, "
-                  "Poya Day, and weekend indicators."
-              ),
-          }
+            This dataset provides structured Sri Lankan holiday and calendar
+            information from January 1, 2005 onward.
 
-          metadata_path = (
-              Path("kaggle-dataset")
-              / "dataset-metadata.json"
-          )
+            It contains two complementary CSV files:
 
-          metadata_path.write_text(
-              json.dumps(
-                  metadata,
-                  indent=2,
-              ),
-              encoding="utf-8",
-          )
+            ## Sri_Lanka_all_dates.csv
 
-          print(
-              metadata_path.read_text(
-                  encoding="utf-8"
-              )
-          )
-          PY
+            A complete daily calendar dataset containing every date from
+            January 1, 2005 onward.
 
-          echo ""
-          echo "Kaggle upload folder:"
-          ls -lh kaggle-dataset
+            It includes ordinary working days, weekends, public holidays,
+            bank holidays, mercantile holidays, and Full Moon Poya Days.
 
+            Each row represents one unique calendar date. Non-holiday dates
+            contain an empty Holiday_Name value and False holiday-category
+            indicators.
+
+            Saturdays and Sundays are identified by Is_Weekend and are also
+            marked as bank holidays.
+
+            ## Sri_Lankan_Holiday_Dataset.csv
+
+            A holiday-only dataset containing named Sri Lankan public, bank,
+            mercantile, and Full Moon Poya holidays from 2005 onward.
+
+            Ordinary working days are not included in this file.
+
+            When multiple holidays occur on the same date, their names are
+            combined using " / ". The Boolean classification columns are also
+            combined so that no holiday-category information is lost.
+
+            ## Main Fields
+
+            - Full_Date
+            - Year
+            - Month
+            - Date
+            - Day
+            - Holiday_Name
+            - Is_Holiday
+            - Is_Public_Holiday
+            - Is_Bank_Holiday
+            - Is_Mercantile_Holiday
+            - Is_Poya_Day
+            - Is_Weekend
+
+            ## Data Sources
+
+            The dataset was independently compiled and processed using publicly
+            available holiday information from:
+
+            - The Central Bank of Sri Lanka
+            - The Department of Government Printing, Sri Lanka
+            - Relevant Government of Sri Lanka publications
+
+            The original institutions remain the authoritative sources for the
+            underlying holiday information.
+
+            ## Data Processing
+
+            The processing pipeline performs extraction, date standardization,
+            holiday-name normalization, duplicate removal, consolidation of
+            holidays occurring on the same date, category assignment, and
+            generation of a continuous daily calendar.
+
+            Historical government calendar information is used before 2019.
+            From 2019 onward, Central Bank of Sri Lanka holiday information is
+            used as the primary reference for dates and holiday names.
+
+            ## Suggested Uses
+
+            This dataset may be useful for:
+
+            - Time-series forecasting
+            - Electricity-demand forecasting
+            - Financial and banking analysis
+            - Business-day calculations
+            - Workforce planning
+            - Retail and transport analysis
+            - Calendar applications
+            - Machine-learning feature engineering
+
+            ## Licence
+
+            The original compilation, organization, normalization, derived
+            fields, and documentation are licensed under Creative Commons
+            Attribution 4.0 International, except for third-party source
+            material.
+
+            ## Disclaimer
+
+            This is an independently maintained dataset and is not an official
+            dataset of the Central Bank of Sri Lanka or the Government of
+            Sri Lanka.
+
+            Users should verify important dates against current official
+            announcements before using the data for legal, banking, financial,
+            employment, regulatory, or compliance decisions.
+            """
+
+            # Remove indentation and unnecessary surrounding whitespace.
+            description = "\n".join(
+                line.strip()
+                for line in description.strip().splitlines()
+            )
+
+            metadata = {
+                "title": "Sri Lanka Holiday Dataset",
+                "id": f"{owner}/{slug}",
+                "subtitle": (
+                    "Complete Sri Lankan daily calendar and holiday records "
+                    "from 2005 onward"
+                ),
+                "description": description,
+                "licenses": [
+                    {
+                        "name": license_name
+                    }
+                ],
+                "keywords": [
+                    "sri lanka",
+                    "holidays",
+                    "calendar",
+                    "public holidays",
+                    "bank holidays",
+                    "poya",
+                    "time series"
+                ]
+            }
+
+            metadata_path = (
+                Path("kaggle-dataset")
+                / "dataset-metadata.json"
+            )
+
+            metadata_path.write_text(
+                json.dumps(
+                    metadata,
+                    indent=2,
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            print(
+                metadata_path.read_text(
+                    encoding="utf-8"
+                )
+            )
+            PY
       # ---------------------------------------------------------
-      # 11. Create or update Kaggle dataset
+      
+            # 11. Create or update Kaggle dataset
       # ---------------------------------------------------------
       - name: Publish to Kaggle
         shell: bash
