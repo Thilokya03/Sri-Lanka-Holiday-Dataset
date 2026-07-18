@@ -3,8 +3,8 @@ import pathlib
 
 import pandas as pd
 
-
-CSV_DIRECTORY = pathlib.Path(__file__).parent.parent / "csv"
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
+CSV_DIRECTORY = PROJECT_ROOT / "csv"
 
 HOLIDAY_CSV_PATH = CSV_DIRECTORY / "Combined_holidays.csv"
 OUTPUT_CSV_PATH = CSV_DIRECTORY / "Sri_Lanka_all_dates.csv"

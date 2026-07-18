@@ -19,7 +19,14 @@ from pypdf import PdfReader
 # =========================================================
 
 BASE_URL = "https://documents.gov.lk/view/cdr/{year}/{year}_E.pdf"
-CSV_PATH = pathlib.Path("csv") / "Document_gov_holidays.csv"
+
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
+CSV_DIRECTORY = PROJECT_ROOT / "csv"
+
+CSV_PATH = (
+    CSV_DIRECTORY / "Document_gov_holidays.csv"
+)
+
 DEBUG_FOLDER = pathlib.Path("debug_ocr")
 
 START_YEAR = 2005

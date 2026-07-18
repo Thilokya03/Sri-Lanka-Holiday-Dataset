@@ -5,7 +5,8 @@ import re
 import pandas as pd
 
 
-CSV_DIRECTORY = pathlib.Path(__file__).parent.parent / "csv"
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
+CSV_DIRECTORY = PROJECT_ROOT / "csv"
 
 CBS_CSV_PATH = CSV_DIRECTORY / "CBS_holidays.csv"
 DOCUMENT_CSV_PATH = CSV_DIRECTORY / "Document_gov_holidays.csv"
