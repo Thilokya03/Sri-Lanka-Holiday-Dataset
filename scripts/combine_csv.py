@@ -4,7 +4,7 @@ import datetime
 
 CBS_CSV_PATH = pathlib.Path(__file__).parent.parent / "csv" / "CBS_holidays.csv"
 
-DOUCUMENT_CSV_PATH = pathlib.Path(__file__).parent.parent / "csv" / "Document_gov_holidays.csv"
+DOCUMENT_CSV_PATH = pathlib.Path(__file__).parent.parent / "csv" / "Document_gov_holidays.csv"
 
 months = {
     "January": 1,
@@ -38,7 +38,7 @@ def combine_df(df1,df2):
 
 if __name__ == "__main__":
     CBS_df = pd.read_csv(CBS_CSV_PATH)
-    Document_df = pd.read_csv(DOUCUMENT_CSV_PATH)
+    Document_df = pd.read_csv(DOCUMENT_CSV_PATH)
     
     new_df = combine_df(CBS_df, Document_df)
     new_df['Full_Date'] = new_df.apply(lambda row: formating_df(row['Year'], row['Month'], row['Date']), axis=1)
@@ -50,6 +50,8 @@ if __name__ == "__main__":
     new_df.sort_values(by=['Full_Date'], inplace=True)
     
     new_df.to_csv(pathlib.Path(__file__).parent.parent / "csv" / "Combined_holidays.csv", index=False)
+    
+    print("Combined CSV file created successfully at: ", pathlib.Path(__file__).parent.parent / "csv" / "Combined_holidays.csv")
     
 
 
