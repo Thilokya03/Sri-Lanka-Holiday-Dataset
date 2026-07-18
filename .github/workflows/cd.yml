@@ -1,0 +1,430 @@
+name: CD - Publish Holiday Dataset
+
+on:
+  # Runs when CSV changes are committed or merged into main
+  push:
+    branches:
+      - main
+    paths:
+      - "csv/*.csv"
+
+  # Allows manual publishing
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: holiday-dataset-publication
+  cancel-in-progress: false
+
+env:
+  KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+  KAGGLE_DATASET_OWNER: ${{ vars.KAGGLE_DATASET_OWNER }}
+  KAGGLE_DATASET_SLUG: ${{ vars.KAGGLE_DATASET_SLUG }}
+  KAGGLE_LICENSE: ${{ vars.KAGGLE_LICENSE }}
+
+jobs:
+  publish-dataset:
+    name: Publish dataset
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # ---------------------------------------------------------
+      # 1. Checkout the committed repository
+      # ---------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # ---------------------------------------------------------
+      # 2. Set up Python
+      # ---------------------------------------------------------
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # ---------------------------------------------------------
+      # 3. Install Kaggle CLI
+      # ---------------------------------------------------------
+      - name: Install Kaggle CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade kaggle
+
+          kaggle --version
+
+      # ---------------------------------------------------------
+      # 4. Validate required settings
+      # ---------------------------------------------------------
+      - name: Validate publication settings
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -z "${KAGGLE_API_TOKEN:-}" ]; then
+            echo "::error::KAGGLE_API_TOKEN secret is missing."
+            exit 1
+          fi
+
+          if [ -z "${KAGGLE_DATASET_OWNER:-}" ]; then
+            echo "::error::KAGGLE_DATASET_OWNER variable is missing."
+            exit 1
+          fi
+
+          if [ -z "${KAGGLE_DATASET_SLUG:-}" ]; then
+            echo "::error::KAGGLE_DATASET_SLUG variable is missing."
+            exit 1
+          fi
+
+          echo "Kaggle dataset:"
+          echo "${KAGGLE_DATASET_OWNER}/${KAGGLE_DATASET_SLUG}"
+
+      # ---------------------------------------------------------
+      # 5. Check required CSV files
+      # ---------------------------------------------------------
+      - name: Check dataset files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          REQUIRED_FILES=(
+            "csv/CBS_holidays.csv"
+            "csv/Document_gov_holidays.csv"
+            "csv/Combined_holidays.csv"
+            "csv/Sri_Lanka_all_dates.csv"
+          )
+
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "::error::Required file is missing: $file"
+              exit 1
+            fi
+
+            if [ ! -s "$file" ]; then
+              echo "::error::Required file is empty: $file"
+              exit 1
+            fi
+
+            echo "Found: $file"
+          done
+
+          echo ""
+          ls -lh csv/*.csv
+
+      # ---------------------------------------------------------
+      # 6. Generate release information
+      # ---------------------------------------------------------
+      - name: Generate release information
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          RELEASE_DATE="$(date -u +'%Y-%m-%d')"
+          SHORT_SHA="${GITHUB_SHA::7}"
+
+          RELEASE_TAG="dataset-${RELEASE_DATE}-${SHORT_SHA}"
+          RELEASE_TITLE="Sri Lanka Holiday Dataset - ${RELEASE_DATE}"
+          VERSION_MESSAGE="Dataset update from GitHub commit ${SHORT_SHA} on ${RELEASE_DATE}"
+
+          echo "date=${RELEASE_DATE}" >> "$GITHUB_OUTPUT"
+          echo "short_sha=${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+          echo "tag=${RELEASE_TAG}" >> "$GITHUB_OUTPUT"
+          echo "title=${RELEASE_TITLE}" >> "$GITHUB_OUTPUT"
+          echo "message=${VERSION_MESSAGE}" >> "$GITHUB_OUTPUT"
+
+      # ---------------------------------------------------------
+      # 7. Prepare GitHub Release assets
+      # ---------------------------------------------------------
+      - name: Prepare GitHub Release assets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p release
+
+          cp csv/CBS_holidays.csv \
+            release/CBS_holidays.csv
+
+          cp csv/Document_gov_holidays.csv \
+            release/Document_gov_holidays.csv
+
+          cp csv/Combined_holidays.csv \
+            release/Combined_holidays.csv
+
+          cp csv/Sri_Lanka_all_dates.csv \
+            release/Sri_Lanka_all_dates.csv
+
+          cd release
+
+          sha256sum \
+            CBS_holidays.csv \
+            Document_gov_holidays.csv \
+            Combined_holidays.csv \
+            Sri_Lanka_all_dates.csv \
+            > SHA256SUMS.txt
+
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZIP_DEFLATED, ZipFile
+
+
+          release_directory = Path(".")
+
+          files = [
+              release_directory / "CBS_holidays.csv",
+              release_directory / "Document_gov_holidays.csv",
+              release_directory / "Combined_holidays.csv",
+              release_directory / "Sri_Lanka_all_dates.csv",
+              release_directory / "SHA256SUMS.txt",
+          ]
+
+          output_file = (
+              release_directory
+              / "Sri_Lanka_Holiday_Dataset.zip"
+          )
+
+          with ZipFile(
+              output_file,
+              mode="w",
+              compression=ZIP_DEFLATED,
+          ) as archive:
+              for file_path in files:
+                  archive.write(
+                      file_path,
+                      arcname=file_path.name,
+                  )
+
+          print(f"Created {output_file}")
+          PY
+
+          ls -lh
+
+      # ---------------------------------------------------------
+      # 8. Create GitHub Release notes
+      # ---------------------------------------------------------
+      - name: Create GitHub Release notes
+        shell: bash
+        env:
+          RELEASE_DATE: ${{ steps.release.outputs.date }}
+          SHORT_SHA: ${{ steps.release.outputs.short_sha }}
+        run: |
+          cat > release-notes.md <<EOF
+          ## Sri Lanka Holiday Dataset
+
+          This release contains the latest committed Sri Lanka
+          holiday datasets.
+
+          ### Files
+
+          - \`CBS_holidays.csv\`
+          - \`Document_gov_holidays.csv\`
+          - \`Combined_holidays.csv\`
+          - \`Sri_Lanka_all_dates.csv\`
+          - \`Sri_Lanka_Holiday_Dataset.zip\`
+          - \`SHA256SUMS.txt\`
+
+          ### Coverage
+
+          The complete dataset contains every date beginning from
+          \`2005-01-01\`.
+
+          It includes public, bank, mercantile, Poya Day, weekend,
+          and general holiday indicators.
+
+          ### Release details
+
+          - Date: ${RELEASE_DATE}
+          - Commit: \`${GITHUB_SHA}\`
+          - Short commit: \`${SHORT_SHA}\`
+          EOF
+
+      # ---------------------------------------------------------
+      # 9. Publish GitHub Release
+      # ---------------------------------------------------------
+      - name: Publish GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          RELEASE_TITLE: ${{ steps.release.outputs.title }}
+        run: |
+          set -euo pipefail
+
+          ASSETS=(
+            "release/CBS_holidays.csv"
+            "release/Document_gov_holidays.csv"
+            "release/Combined_holidays.csv"
+            "release/Sri_Lanka_all_dates.csv"
+            "release/Sri_Lanka_Holiday_Dataset.zip"
+            "release/SHA256SUMS.txt"
+          )
+
+          if gh release view "$RELEASE_TAG" \
+            >/dev/null 2>&1; then
+
+            echo "GitHub Release already exists. Updating it."
+
+            gh release upload \
+              "$RELEASE_TAG" \
+              "${ASSETS[@]}" \
+              --clobber
+
+            gh release edit \
+              "$RELEASE_TAG" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-notes.md \
+              --latest
+          else
+            echo "Creating GitHub Release."
+
+            gh release create \
+              "$RELEASE_TAG" \
+              "${ASSETS[@]}" \
+              --target "$GITHUB_SHA" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-notes.md \
+              --latest
+          fi
+
+      # ---------------------------------------------------------
+      # 10. Prepare Kaggle dataset folder
+      # ---------------------------------------------------------
+      - name: Prepare Kaggle dataset
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p kaggle-dataset
+
+          cp csv/CBS_holidays.csv \
+            kaggle-dataset/CBS_holidays.csv
+
+          cp csv/Document_gov_holidays.csv \
+            kaggle-dataset/Document_gov_holidays.csv
+
+          cp csv/Combined_holidays.csv \
+            kaggle-dataset/Combined_holidays.csv
+
+          cp csv/Sri_Lanka_all_dates.csv \
+            kaggle-dataset/Sri_Lanka_all_dates.csv
+
+          # Use CC-BY-4.0 when no licence variable was supplied.
+          export EFFECTIVE_KAGGLE_LICENSE="${
+            KAGGLE_LICENSE:-CC-BY-4.0
+          }"
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+
+          owner = os.environ["KAGGLE_DATASET_OWNER"]
+          slug = os.environ["KAGGLE_DATASET_SLUG"]
+
+          license_name = os.environ[
+              "EFFECTIVE_KAGGLE_LICENSE"
+          ]
+
+          metadata = {
+              "title": "Sri Lanka Holiday Dataset",
+              "id": f"{owner}/{slug}",
+              "licenses": [
+                  {
+                      "name": license_name,
+                  }
+              ],
+          }
+
+          metadata_path = (
+              Path("kaggle-dataset")
+              / "dataset-metadata.json"
+          )
+
+          metadata_path.write_text(
+              json.dumps(
+                  metadata,
+                  indent=2,
+              ),
+              encoding="utf-8",
+          )
+
+          print(
+              metadata_path.read_text(
+                  encoding="utf-8"
+              )
+          )
+          PY
+
+          echo "Kaggle upload files:"
+          ls -lh kaggle-dataset
+
+      # ---------------------------------------------------------
+      # 11. Create or update Kaggle Dataset
+      # ---------------------------------------------------------
+      - name: Publish to Kaggle
+        shell: bash
+        env:
+          VERSION_MESSAGE: ${{ steps.release.outputs.message }}
+        run: |
+          set -euo pipefail
+
+          DATASET_ID="${
+            KAGGLE_DATASET_OWNER
+          }/${
+            KAGGLE_DATASET_SLUG
+          }"
+
+          echo "Publishing Kaggle dataset: ${DATASET_ID}"
+
+          if kaggle datasets status "$DATASET_ID" \
+            >/tmp/kaggle-status.txt 2>&1; then
+
+            echo "Kaggle dataset already exists."
+            echo "Creating a new dataset version."
+
+            kaggle datasets version \
+              -p kaggle-dataset \
+              -m "$VERSION_MESSAGE"
+          else
+            echo "Kaggle dataset does not exist yet."
+            echo "Creating the first public dataset version."
+
+            kaggle datasets create \
+              -p kaggle-dataset \
+              --public
+          fi
+
+      # ---------------------------------------------------------
+      # 12. Show publication results
+      # ---------------------------------------------------------
+      - name: Show publication results
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          set -euo pipefail
+
+          GITHUB_RELEASE_URL="$(
+            gh release view "$RELEASE_TAG" \
+              --json url \
+              --jq '.url'
+          )"
+
+          KAGGLE_DATASET_URL="https://www.kaggle.com/datasets/${
+            KAGGLE_DATASET_OWNER
+          }/${
+            KAGGLE_DATASET_SLUG
+          }"
+
+          echo "::notice::GitHub Release: ${GITHUB_RELEASE_URL}"
+          echo "::notice::Kaggle Dataset: ${KAGGLE_DATASET_URL}"
